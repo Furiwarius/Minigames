@@ -1,9 +1,9 @@
-import random
-import threading
-
 from warior import Warior
 from paladin import Paladin
 from assassin import Assassin
+from sample import Sample
+
+from population import Population
 
 
 print("Сегодня с помощью основ ооп мы создадим 2 рандомные армии и завяжем между ними бой")
@@ -12,51 +12,32 @@ print("Сегодня с помощью основ ооп мы создадим 
 
 #------------------------------------------------------------------------------------------
 
-def duel():
-    f_win = 0
-    k_win = 0
-    for i in range(1, 21):
-                
-        war1 = Warior("Furiwarius")
-        war2 = Assassin("KissasPissas")
-    
-        war1.targetSelection(war2)
-        war2.targetSelection(war1)
-    
-        war1.attack(war1.target)
-        war2.attack(war2.target)
-    
-        print(f"Начинается бой {i}")
-        while war1 and war2:
-            pass
-    
-        if war1.state_live: f_win+=1
-        else: k_win+=1
-    else:
-        print(f"Furiwarius победил {f_win}\nKissasPissas победила {k_win}")
+def duel2(): 
 
-def duel2():              
     war1 = Warior("Furiwarius")
     war2 = Assassin("KissasPissas")
-    
-    war1.targetSelection(war2)
-    war2.targetSelection(war1)
-    
 
-    th = threading.Thread(target=war1.attack(war1.target))
-    th2 = threading.Thread(target=war2.attack(war2.target))
-    
-    
+    group_1  = Population("Group 1")
+    group_1.addPerson(war1)
 
-    th.start()
-    th2.start()    
-    
-    
-    if war1.state_live: print(f"Furiwarius победил\n")
-    else: print(f"KissasPissas победил\n")
+    group_2 = Population("Group 2")
+    group_2.addPerson(war2)
 
 
-#duel()
+    war1.enemyGroupTarget(group_2.getPopulation())
+    war2.enemyGroupTarget(group_1.getPopulation())
+        
+    war1.start()
+    war2.start() 
+    while True:
+        if war1.state_live and war2.state_live==False: 
+            print(f"Furiwarius победил\n")
+            break
+        elif war2.state_live and war1.state_live==False: 
+            print(f"KissasPissas победил\n")
+            break
+
+
 duel2()
 
         

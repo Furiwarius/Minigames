@@ -26,26 +26,28 @@ class Assassin(Sample):
         self.deadlyPoison_duration_current = time()
 
     
-    def info(self):
+    def info(self, damage_caused=0):
         print("_______________________________________________")
-        super().info()
+        super().info(damage_caused)
         print(f"Счетчик ударов {self.beat_counter}")
         print(f"Энергия {self.energy}")
 
 
-    def giveDamage(self):
-        self.info()
-        
+    def giveDamage(self):        
         self.energy+=25
         if self.energy>self.energy_max: 
             self.energy = self.energy_max
 
         if self.beat_counter==3 and self.energy>=60:
-            return self.seriesBlows()
+            result_damage = self.seriesBlows()
+            #self.info(result_damage)
+            return result_damage
         else:
             self.deadlyPoison()
             self.beat_counter+=1
-            return super().giveDamage()+self.poison(self.target)
+            result_damage = super().giveDamage()+self.poison(self.target)
+            #self.info(result_damage)
+            return result_damage
 
 
     def getDamage(self, value: int):
@@ -85,4 +87,16 @@ class Assassin(Sample):
             result_damage+=super().giveDamage()
         self.beat_counter=0
         return result_damage
+    
+    
+    def enemyGroupTarget(self, group_enemy:list):
+        super().enemyGroupTarget(group_enemy)
+
+
+    def attack (self):
+        super().attack()
+
+
+    def run(self):
+        super().run()
         

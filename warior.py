@@ -16,20 +16,19 @@ class Warior(Sample):
         self.armor+=6
         self.damage+=2
 
-        self.speed-=10
     
 
-    def info(self):
+    def info(self, damage_caused=0):
         print("_______________________________________________")
-        super().info()
+        super().info(damage_caused)
         print(f"Ярость {self.fury}")
+
 
     def giveDamage(self):
         if self.fury!=0: self.burst_damage+=(self.fury//20)/10
         result_damage = super().giveDamage()*self.furiousBlow()
 
-        self.info()
-        print(f"нанесенный урон {result_damage}")
+        #self.info(result_damage)        
         return result_damage
 
     def getDamage(self, value: int):
@@ -56,3 +55,14 @@ class Warior(Sample):
             self.fury-=80
             self.state_live=True
             self.hp=10
+
+    def enemyGroupTarget(self, group_enemy:list):
+        super().enemyGroupTarget(group_enemy)
+
+
+    def attack (self):
+        super().attack()
+
+
+    def run(self):
+        super().run()

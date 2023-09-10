@@ -4,12 +4,29 @@ from population import Population
 
 class World():
 
-    populations = []
+    def __init__ (self, name_world = "newWorld"):
+        self.name = name_world
+        self.__populations__ = []
+
+
+    def __str__ (self) -> str:
+        return self.name
+    
 
     def addPopulation (self, group:Population):
-        if self.populations.count(group)==0:
-            self.populations.append(group)
+        if self.__populations__.count(group)==0:
+            self.__populations__.append(group)
+
+
+    def getPopulations (self):
+        return self.__populations__
+
+
+    def size(self):
+        return len(self.__populations__)
+
 
     def war(self):
         pass
+
 

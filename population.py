@@ -5,24 +5,26 @@ from sample import Sample
 
 class Population():
 
-    __general_population__ = []
-    __alive__ = []
-    __dead__ = []
-
-    name_population = ""
-
-    def __init__(self, name="group"):
+    def __init__(self, name="newPopulatoin"):
         self.name_population=name
+        
+        self.__general_population__ = []
+        self.__alive__ = []
+        self.__dead__ = []
 
     
     def __str__(self) -> str:
         return self.name_population
 
 
+    def __bool__ (self):
+        if len(self.__general_population__)>0: return True
+        else: return False
+
+
     def addPerson(self, person:Sample):
         if self.__general_population__.count(person)==0:
             self.__general_population__.append(person)
-            person.setPopulation(self)
             if person: self.__alive__.append(person)
             else: self.__dead__.append(person)
 

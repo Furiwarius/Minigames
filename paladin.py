@@ -24,11 +24,22 @@ class Paladin (Sample):
         self.hp+=20
         self.percent_hp = self.hp
         self.lack+=10
+    
+
+    def info(self, damage_caused=0):
+        print("_______________________________________________")
+        super().info(damage_caused)
+        print(f"Святая ярость {self.holy_fury}")
+        print(f"Броня {self.armor}")
+        print(f"Регенерация {self.regeneration}")
+
 
 
     def giveDamage(self):
         self.holyFight()
-        return super().giveDamage()
+        result_damage = super().giveDamage()
+        self.info(result_damage)
+        return result_damage
     
     def getDamage(self, value: int):
         self.holyFight()
@@ -77,3 +88,14 @@ class Paladin (Sample):
         # ослепление светом
 
         pass
+
+    def enemyGroupTarget(self, group_enemy:list):
+        super().enemyGroupTarget(group_enemy)
+
+
+    def attack (self):
+        super().attack()
+
+
+    def run(self):
+        super().run()
