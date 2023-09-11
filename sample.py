@@ -1,8 +1,11 @@
 from random import randrange
 from time import time
 import threading
+from getDamage import GetDamage
+from giveDamage import GiveDamage
 
-class Sample(threading.Thread):
+
+class Sample(threading.Thread, GetDamage, GiveDamage):
 
     def __init__(self, name = "unknown"):
         super().__init__()

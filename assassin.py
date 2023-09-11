@@ -40,13 +40,13 @@ class Assassin(Sample):
 
         if self.beat_counter==3 and self.energy>=60:
             result_damage = self.seriesBlows()
-            #self.info(result_damage)
+            self.info(result_damage)
             return result_damage
         else:
             self.deadlyPoison()
             self.beat_counter+=1
             result_damage = super().giveDamage()+self.poison(self.target)
-            #self.info(result_damage)
+            self.info(result_damage)
             return result_damage
 
 

@@ -14,8 +14,8 @@ print("Сегодня с помощью основ ооп мы создадим 
 
 def duel2(): 
 
-    war1 = Warior("Furiwarius")
-    war2 = Assassin("KissasPissas")
+    war1 = Paladin("Furiwarius")
+    war2 = Warior("KissasPissas")
 
     group_1  = Population("Group 1")
     group_1.addPerson(war1)
@@ -39,5 +39,3 @@ def duel2():
 
 
 duel2()
-
-        

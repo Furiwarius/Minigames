@@ -28,7 +28,7 @@ class Warior(Sample):
         if self.fury!=0: self.burst_damage+=(self.fury//20)/10
         result_damage = super().giveDamage()*self.furiousBlow()
 
-        #self.info(result_damage)        
+        self.info(result_damage)        
         return result_damage
 
     def getDamage(self, value: int):
