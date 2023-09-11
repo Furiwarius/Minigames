@@ -57,6 +57,7 @@ class Paladin (Sample):
     
     def getDamage(self, value: int):
         self.holyFury()
+        self.healthRecovery()
         self.holyHealing()
         self.holyFight()
         super().getDamage(value)
@@ -123,7 +124,7 @@ class Paladin (Sample):
                     self.state_live=True
                 self.hp+=lost_hp
                 self.recharge_blindingLight_current=time()
-                return lost_hp*1.5
+                return lost_hp
         else: return 0
 
 
