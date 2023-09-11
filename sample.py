@@ -16,7 +16,7 @@ class Sample(threading.Thread, GetDamage, GiveDamage):
         self.burst_damage = 1
 
         self.speed = 40          # на 10 speed 0,23 сек
-        self.attack_current = 1.5  # 3 - максимальный кд на атаку
+        self.attack_current = 3  # 3 - максимальный кд на атаку
 
         self.lack = 10 # 10 %
         self.crete = 0.5

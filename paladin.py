@@ -15,12 +15,14 @@ class Paladin (Sample):
 
         self.recharge = 3
         self.recharge_holyHealing_current = 0
-
         self.holy_healing = False
         self.duration_holyHealing = 2
         self.duration_holyHealing_current = 0
 
-        self.recharge_blindingLight_current = 0
+        self.recharge_blindingLight = 5
+        self.recharge_blindingLight_current = time()
+        self.duration_blindingLight = 3
+
 
         self.storage_holyFight=0
         
@@ -44,16 +46,19 @@ class Paladin (Sample):
         self.holyFury()
         self.holyFight()
         self.holyHealing()
-        self.blindingLight()
-        
+        blindingLight_damage = self.blindingLight()
+
         result_damage = super().giveDamage()
+        if blindingLight_damage!=0: result_damage=blindingLight_damage
         self.info(result_damage)
         
         return result_damage
     
+    
     def getDamage(self, value: int):
         self.holyFury()
         self.holyHealing()
+        self.holyFight()
         super().getDamage(value)
 
 
@@ -93,8 +98,8 @@ class Paladin (Sample):
                 self.regeneration-=3
                 self.holy_healong=False
                 
-        if self.holy_fury>=40 and time()-self.recharge_holyHealing_current>self.recharge:
-            self.holy_fury-=40
+        if self.holy_fury>=30 and time()-self.recharge_holyHealing_current>self.recharge:
+            self.holy_fury-=30
             self.armor+=5
             self.regeneration+=3
             self.holy_healong=True
@@ -106,7 +111,20 @@ class Paladin (Sample):
     def blindingLight(self):
         # ослепление светом
 
-        pass
+        if self.holy_fury>=70 and time()-self.recharge_blindingLight_current>=self.recharge_blindingLight:
+            self.holy_fury-=70
+            duration = time()
+            hp = self.hp
+            lost_hp = 0
+            while time()-duration<=self.duration_blindingLight:
+                lost_hp += hp-self.hp
+            else:
+                if self.state_live==False:
+                    self.state_live=True
+                self.hp+=lost_hp
+                self.recharge_blindingLight_current=time()
+                return lost_hp*1.5
+        else: return 0
 
 
     def enemyGroupTarget(self, group_enemy:list):
