@@ -19,29 +19,41 @@ class Shooter(Sample):
             self.crippled_damage = 0
             
 
-            self.recharge_sharpEye = 5
+            self.recharge_sharpEye = 3
             self.recharge_sharpEye_current = time()
             
 
             self.armor-=3
-            self.damage-=5
+            self.damage-=4
 
             self.speed+=25
             self.increase_speed_current=0
             self.increase_speed = 5
+
+
+    def info(self, damage_caused=0):
+        print("_______________________________________________")
+        super().info(damage_caused)
+        print(f"Скорость {self.speed}")
+        print(f"Энергия {self.passion}")
+
 
     def giveDamage(self):
         self.passion+=15
         self.cripplingShotBaffOf()
         sharpEye_damage = self.sharpEye()
         if self.sharpEye()!=0:
+            self.info(sharpEye_damage)
             return sharpEye_damage
         else:
-            return super().giveDamage()+self.cripplingShot()
+            result_damage = super().giveDamage()+self.cripplingShot()
+            self.info(result_damage)
+            return result_damage
 
-    def getDamage(self):
+
+    def getDamage(self, value:int):
         self.passion+=5
-        super().getDamage()
+        super().getDamage(value)
     
 
     def cripplingShot(self):
@@ -52,6 +64,8 @@ class Shooter(Sample):
             result_damage = 5+ self.target.hp*0.05
             self.cripplingShotBaffOn()
             return result_damage
+        else: 
+            return 0
 
     def cripplingShotBaffOn(self):
         #включение усиления от колечащего выстрела
@@ -84,7 +98,7 @@ class Shooter(Sample):
     def increasedPerformanceDegradation(self, value=1):
         # при value=1 прибавляет характеристики, при -1 отнимает
         self.lack+=randrange(20, 50)*value
-        self.crete+=randrange(1,4)*value
+        self.crete+=randrange(1,5)*value
 
     
     def sharpEye(self):
@@ -92,7 +106,7 @@ class Shooter(Sample):
         if time()-self.recharge_sharpEye_current>=self.recharge_sharpEye and self.passion>=60:
             self.recharge_sharpEye_current=time()
             self.passion-=60
-            self.increasedPerformanceDegradation()
+            self.increasedPerformanceDegradation(1)
             result_damage = super().giveDamage()
             self.increasedPerformanceDegradation(-1)
             return result_damage

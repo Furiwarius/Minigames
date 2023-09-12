@@ -1,6 +1,8 @@
 from warior import Warior
 from paladin import Paladin
 from assassin import Assassin
+from shooter import Shooter
+from mage import Mage
 from sample import Sample
 
 from population import Population
@@ -14,7 +16,7 @@ print("Сегодня с помощью основ ооп мы создадим 
 
 def duel2(): 
 
-    war1 = Paladin("Furiwarius")
+    war1 = Mage("Furiwarius")
     war2 = Warior("KissasPissas")
 
     group_1  = Population("Group 1")

@@ -30,6 +30,14 @@ class Mage(Sample):
         self.armor-=3
         self.damage-=2
 
+
+    def info(self, damage_caused=0):
+        print("_______________________________________________")
+        super().info(damage_caused)
+        print(f"Заряды магического взрыва {self.magicExplocion_count}")
+        print(f"Сохраненный урон {self.stored_damage}")
+        print(f"Мана {self.mana}")
+
         
     def giveDamage(self):
         self.recoveryMana()
@@ -41,10 +49,11 @@ class Mage(Sample):
 
         result_damage=self.fireBall()
         if result_damage!=0:
+            self.info(result_damage)
             return result_damage
         else:
-            result_damage = super().giveDamage
-       
+            result_damage = super().giveDamage()
+        self.info(result_damage)
         return result_damage
 
 
@@ -61,6 +70,7 @@ class Mage(Sample):
     def recoveryMana(self):
         #восстановление маны
         self.mana+=(time()-self.recovery_mana_current)/self.recovery_time*self.recovery_mana
+        if self.mana>=self.max_mana: self.mana=self.max_mana
         
 
     def magicShield(self):
@@ -69,7 +79,6 @@ class Mage(Sample):
             self.recovery_magicShield_current=time()
             self.mana-=30
             self.magicShieldOn()
-            self.magicCountMax()
     
 
     def magicShieldOn(self):
