@@ -38,6 +38,8 @@ class Sample(threading.Thread, GetDamage, GiveDamage):
         print(f"Здоровье {self.name} {self.hp}")
         if damage_caused!=0:
             print(f"Нанесенный урон {damage_caused}")
+        result_string = f"\n{self.name}\nЗдоровье: {self.hp}\nНанесенный урон: {damage_caused}\n"
+        return result_string
 
 
     def getDamage(self, value:int):

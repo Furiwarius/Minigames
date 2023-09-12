@@ -1,5 +1,6 @@
 from random import randrange
 from time import time
+from collectionInfo import SaveInfo
 
 from sample import Sample
 
@@ -25,10 +26,14 @@ class Assassin(Sample):
         self.deadlyPoison_duration = 3
         self.deadlyPoison_duration_current = time()
 
+        self.save_info = SaveInfo(self)
+
     
     def info(self, damage_caused=0):
         print("_______________________________________________")
-        super().info(damage_caused)
+        result_string = super().info(damage_caused)+f"Счетчик ударов {self.beat_counter}\nЭнергия {self.energy}\n"
+        self.save_info.run(result_string)
+
         print(f"Счетчик ударов {self.beat_counter}")
         print(f"Энергия {self.energy}")
 

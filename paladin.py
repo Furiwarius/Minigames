@@ -35,11 +35,14 @@ class Paladin (Sample):
 
     def info(self, damage_caused=0):
         print("_______________________________________________")
-        super().info(damage_caused)
+        result_string = super().info(damage_caused)
+        +f"Святая ярость {self.holy_fury}\nБроня {self.armor}\nРегенерация {self.regeneration}\n"
+        
         print(f"Святая ярость {self.holy_fury}")
         print(f"Броня {self.armor}")
         print(f"Регенерация {self.regeneration}")
-
+        
+        return result_string
 
 
     def giveDamage(self):

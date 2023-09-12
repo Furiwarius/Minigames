@@ -33,9 +33,13 @@ class Shooter(Sample):
 
     def info(self, damage_caused=0):
         print("_______________________________________________")
-        super().info(damage_caused)
+        result_string = super().info(damage_caused)
+        +f"Скорость {self.speed}\nЭнергия {self.passion}\n"
+        
         print(f"Скорость {self.speed}")
         print(f"Энергия {self.passion}")
+        
+        return result_string
 
 
     def giveDamage(self):

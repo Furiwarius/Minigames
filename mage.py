@@ -14,7 +14,7 @@ class Mage(Sample):
         self.recovery_time=1.5
         self.recovery_mana_current=time()
 
-        self.recovery_fireBall=3
+        self.recovery_fireBall=2
         self.recovery_fireBall_current=time()
 
         self.recovery_magicShield=4
@@ -33,10 +33,14 @@ class Mage(Sample):
 
     def info(self, damage_caused=0):
         print("_______________________________________________")
-        super().info(damage_caused)
+        result_string = super().info(damage_caused)
+        +f"Заряды магического взрыва {self.magicExplocion_count}\nСохраненный урон {self.stored_damage}\nМана {self.mana}\n"
+        
         print(f"Заряды магического взрыва {self.magicExplocion_count}")
         print(f"Сохраненный урон {self.stored_damage}")
         print(f"Мана {self.mana}")
+        
+        return result_string
 
         
     def giveDamage(self):

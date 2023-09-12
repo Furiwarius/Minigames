@@ -1,6 +1,7 @@
 from sample import Sample
 from random import randrange
 from time import time
+from collectionInfo import SaveInfo
 
 
 class Warior(Sample):
@@ -14,14 +15,16 @@ class Warior(Sample):
         self.recharge_furiousBlow_current = time()
 
         self.armor+=6
-        self.damage+=2
 
+        self.save_info = SaveInfo(self)
     
 
     def info(self, damage_caused=0):
         print("_______________________________________________")
-        super().info(damage_caused)
+        result_string = super().info(damage_caused)+f"Ярость {self.fury}\n"
+        self.save_info.run(result_string)
         print(f"Ярость {self.fury}")
+        
 
 
     def giveDamage(self):
@@ -31,30 +34,33 @@ class Warior(Sample):
         self.info(result_damage)        
         return result_damage
 
+
     def getDamage(self, value: int):
         super().getDamage(value)
         self.fury+=10
         self.throughDeath()
 
+
     def furiousBlow (self):
-        
         # кровавый удар
 
         if self.fury>=40 and time()-self.recharge_furiousBlow_current>=self.recharge_furiousBlow:
             self.fury-=40
+            self.recharge_furiousBlow_current=time()
             return randrange(2, 4)
         else: 
             self.fury+=20
             return 1
         
+
     def throughDeath (self):
-        
         # сквозь смерть
 
         if self.fury>=80 and self.state_live==False:
             self.fury-=80
             self.state_live=True
             self.hp=10
+
 
     def enemyGroupTarget(self, group_enemy:list):
         super().enemyGroupTarget(group_enemy)
