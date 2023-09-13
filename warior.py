@@ -20,11 +20,11 @@ class Warior(Sample):
     
 
     def info(self, damage_caused=0):
-        print("_______________________________________________")
-        result_string = super().info(damage_caused)+f"Ярость {self.fury}\n"
-        self.save_info.run(result_string)
-        print(f"Ярость {self.fury}")
         
+        result_string = super().info(damage_caused)+f"Fury {self.fury}\n"
+        self.save_info.run(result_string)
+
+        return result_string        
 
 
     def giveDamage(self):

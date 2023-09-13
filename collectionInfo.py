@@ -20,7 +20,7 @@ class SaveInfo (threading.Thread):
     def creatingReport(self):
         #создание файла для отчета
         report_file = open(self.path, "w")
-        report_file.write(f"{self.name} {type(self.character)}")
+        report_file.write(f"{self.name} {type(self.character)}\n")
         report_file.close()
 
 

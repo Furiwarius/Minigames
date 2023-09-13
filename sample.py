@@ -15,7 +15,7 @@ class Sample(threading.Thread, GetDamage, GiveDamage):
         self.damage = 15
         self.burst_damage = 1
 
-        self.speed = 40          # на 10 speed 0,23 сек
+        self.speed = randrange(25,41)          # на 10 speed 0,23 сек
         self.attack_current = 3  # 3 - максимальный кд на атаку
 
         self.lack = 10 # 10 %
@@ -35,10 +35,8 @@ class Sample(threading.Thread, GetDamage, GiveDamage):
     
     
     def info(self, damage_caused=0):
-        print(f"Здоровье {self.name} {self.hp}")
-        if damage_caused!=0:
-            print(f"Нанесенный урон {damage_caused}")
-        result_string = f"\n{self.name}\nЗдоровье: {self.hp}\nНанесенный урон: {damage_caused}\n"
+        result_string = f"\n{self.name}\nState live {self.state_live}\nHp: {self.hp}\nDamage caused: {damage_caused}\n"
+
         return result_string
 
 

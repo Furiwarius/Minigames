@@ -1,6 +1,6 @@
 import random
 from time import time
-
+from collectionInfo import SaveInfo
 from sample import Sample
 
 class Paladin (Sample):
@@ -31,18 +31,17 @@ class Paladin (Sample):
         self.hp+=20
         self.max_hp = self.hp
         self.lack+=10
-    
+        
+        self.save_info = SaveInfo(self)
 
     def info(self, damage_caused=0):
-        print("_______________________________________________")
-        result_string = super().info(damage_caused)
-        +f"Святая ярость {self.holy_fury}\nБроня {self.armor}\nРегенерация {self.regeneration}\n"
         
-        print(f"Святая ярость {self.holy_fury}")
-        print(f"Броня {self.armor}")
-        print(f"Регенерация {self.regeneration}")
+        result_string = super().info(damage_caused)+f"Holy fury {self.holy_fury}\nArmor {self.armor}\nRegeneration {self.regeneration}\n"
+
+        self.save_info.run(result_string)
         
         return result_string
+        
 
 
     def giveDamage(self):

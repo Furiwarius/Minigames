@@ -30,12 +30,11 @@ class Assassin(Sample):
 
     
     def info(self, damage_caused=0):
-        print("_______________________________________________")
-        result_string = super().info(damage_caused)+f"Счетчик ударов {self.beat_counter}\nЭнергия {self.energy}\n"
+        
+        result_string = super().info(damage_caused)+f"Beat counter {self.beat_counter}\nEnergy {self.energy}\n"
         self.save_info.run(result_string)
 
-        print(f"Счетчик ударов {self.beat_counter}")
-        print(f"Энергия {self.energy}")
+        return result_string
 
 
     def giveDamage(self):        

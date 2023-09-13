@@ -1,6 +1,7 @@
 from sample import Sample
 from time import time
 from random import randrange
+from collectionInfo import SaveInfo
 
 class Mage(Sample):
 
@@ -30,15 +31,13 @@ class Mage(Sample):
         self.armor-=3
         self.damage-=2
 
+        self.save_info = SaveInfo(self)
+
 
     def info(self, damage_caused=0):
-        print("_______________________________________________")
-        result_string = super().info(damage_caused)
-        +f"Заряды магического взрыва {self.magicExplocion_count}\nСохраненный урон {self.stored_damage}\nМана {self.mana}\n"
-        
-        print(f"Заряды магического взрыва {self.magicExplocion_count}")
-        print(f"Сохраненный урон {self.stored_damage}")
-        print(f"Мана {self.mana}")
+        class_str = f"Magic explocion {self.magicExplocion_count}\nStored damage {self.stored_damage}\nMana {self.mana}\n"
+        result_string = super().info(damage_caused)+class_str
+        self.save_info.run(result_string)
         
         return result_string
 

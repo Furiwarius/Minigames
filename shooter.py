@@ -1,6 +1,7 @@
 from sample import Sample
 from time import time
 from random import randrange
+from collectionInfo import SaveInfo
 
 
 class Shooter(Sample):
@@ -30,14 +31,13 @@ class Shooter(Sample):
             self.increase_speed_current=0
             self.increase_speed = 5
 
+            self.save_info = SaveInfo(self)
+
 
     def info(self, damage_caused=0):
-        print("_______________________________________________")
-        result_string = super().info(damage_caused)
-        +f"Скорость {self.speed}\nЭнергия {self.passion}\n"
-        
-        print(f"Скорость {self.speed}")
-        print(f"Энергия {self.passion}")
+        class_str = f"Speed {self.speed}\nEnergy {self.passion}\n"
+        result_string = super().info(damage_caused)+class_str 
+        self.save_info.run(result_string)        
         
         return result_string
 
