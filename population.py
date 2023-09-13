@@ -6,11 +6,10 @@ from sample import Sample
 class Population():
 
     def __init__(self, name="newPopulatoin"):
+
         self.name_population=name
-        
-        self.__general_population__ = []
-        self.__alive__ = []
-        self.__dead__ = []
+        self.general_population = []
+        self.enemy_list = []
 
     
     def __str__(self) -> str:
@@ -18,70 +17,39 @@ class Population():
 
 
     def __bool__ (self):
-        if len(self.__general_population__)>0: return True
+        if len(self.general_population)>0: return True
         else: return False
 
 
     def addPerson(self, person:Sample):
-        if self.__general_population__.count(person)==0:
-            self.__general_population__.append(person)
-            if person: self.__alive__.append(person)
-            else: self.__dead__.append(person)
-
-
-    def setAlive(self, person:Sample):
-        # Переносит из мертвых к живым
-        
-        if person in self.__general_population__ and person in self.__dead__:
-            self.__alive__.append(person)
-            self.__dead__.remove(person)
-            
-
-    def setDead(self, person: Sample):
-        # переносит из живых к мертвым
-
-        if person in self.__general_population__ and person in self.__alive__:
-            self.__dead__.append(person)
-            self.__alive__.remove(person)
+        if self.general_population.count(person)==0:
+            self.general_population.append(person)
+            person.population=self
 
 
     def getPopulation(self):
-        return self.__general_population__
+        return self.general_population
     
-
-    def getAlive(self):
-        return self.__alive__
     
-
-    def getDead(self):
-        return self.__dead__
-    
-
     def examBelonging (self, person:Sample):
         # Проверка на принадлежность к данной группе
 
-        if person in self.__general_population__: return True
+        if person in self.general_population: return True
         return False
+
+
+    def getEnemy(self):
+        return self.enemy_list
     
-
-    def examAlive (self, person:Sample):
-        # Проверка на принадлежность к живым данной группы
-
-        if person in self.__alive__: return True  
-        return False
     
-
-    def examDead (self, person:Sample):
-        # Проверка на принадлежность к мертвым данной группы
-
-        if person in self.__dead__: return True
-        return False
+    def addEnemy(self, enemys:list):
+        if enemys!=self.general_population and enemys not in self.general_population:
+            
+            for elem in enemys:
+                self.enemy_list.append(elem)
+            self.targetSetting()
+            
     
-
-    def delitePerson(self, person:Sample):
-        # Удаление персонажа
-
-        if person in self.__general_population__:
-            self.__general_population__.remove(person)
-            if person: self.__alive__.remove(person)
-            else: self.__dead__.remove(person)
+    def targetSetting (self):
+        for char in self.general_population:
+            char.enemyGroupTarget(self.enemy_list)

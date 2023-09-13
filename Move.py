@@ -1,10 +1,27 @@
-# вспоминаем язык python
+import bext, random
+'''
+width, height = bext.size()
 
-from time import time, sleep
+try:
+    while True:
+        bext.fg('random')
+        bext.bg('random')
+        x = random.randint(0, width - 1)
+        y = random.randint(0, height - 1)
 
-a = time()
-print(a)
-sleep(3)
-b = time()
-print(b)
+        if x == width -1 and y == height - 1:
+            continue # Windows has weird behavior where a character at the end of the row always moves the cursor to the next row.
+        bext.goto(x, y)
+        print('*', end='')
+except KeyboardInterrupt:
+    pass
+'''
 
+class newClass():
+
+    def __init__(self, name:str) :
+        self.name = name
+
+a = []
+a.append(newClass)
+b = a[0]("22")

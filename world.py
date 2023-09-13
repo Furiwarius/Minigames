@@ -16,6 +16,10 @@ class World():
     def addPopulation (self, group:Population):
         if self.__populations__.count(group)==0:
             self.__populations__.append(group)
+        if len(self.__populations__)>1:
+            for popul in self.__populations__:
+                group.addEnemy(popul.getPopulation())
+                popul.addEnemy(group.getPopulation())
 
 
     def getPopulations (self):

@@ -22,12 +22,12 @@ class Sample(threading.Thread, GetDamage, GiveDamage):
         self.crete = 0.5
 
         self.state_live = True # 1-жив, 0-мертв
-        self.state_move = 0 # 1-ходит, 0-не ходит
 
         self.target = None
         self.name = name
 
-        self.group_enemy = None
+        self.population = None
+        self.group_enemy = []
 
 
     def __bool__ (self):
@@ -63,11 +63,11 @@ class Sample(threading.Thread, GetDamage, GiveDamage):
                 # ДОРАБОТАТЬ С УЧЕТОМ ПЕРЕДВИЖЕНИЯ
                 #------------------------------------
         self.target = None
-        
     
-    def enemyGroupTarget(self, group_enemy:list):
-        if self.group_enemy==None and self not in group_enemy:
-            self.group_enemy = group_enemy
+
+
+    def enemyGroupTarget(self):
+        self.group_enemy = self.population.getEnemy()
         self.enemyTarget()
         
 

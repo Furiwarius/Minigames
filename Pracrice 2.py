@@ -5,14 +5,15 @@ from shooter import Shooter
 from mage import Mage
 from sample import Sample
 
+import bext
+import generators as gen
+
+from world import World
 from population import Population
 
 
 print("Сегодня с помощью основ ооп мы создадим 2 рандомные армии и завяжем между ними бой")
 
-
-
-#------------------------------------------------------------------------------------------
 
 def duel2(): 
 
@@ -39,5 +40,15 @@ def duel2():
             print(f"KissasPissas победил\n")
             break
 
+def duel3():
+    new_world = World("my_World")
+    
+    new_pop1 = gen.populationGenerator(3)
+    new_pop2 = gen.populationGenerator(3)
+    new_world.addPopulation(new_pop1)
+    new_world.addPopulation(new_pop2)
 
-duel2()
+    return new_world
+        
+new_world = duel3()
+

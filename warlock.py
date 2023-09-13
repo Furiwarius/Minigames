@@ -68,3 +68,15 @@ class Warlock(Sample):
             self.recharge_lifeSiphon_current=time()
             return result_damage  
         else: return 0  
+
+    
+    def enemyGroupTarget(self, group_enemy:list):
+        super().enemyGroupTarget(group_enemy)
+
+
+    def attack (self):
+        super().attack()
+
+
+    def run(self):
+        super().run()
