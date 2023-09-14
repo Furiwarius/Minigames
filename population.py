@@ -1,14 +1,15 @@
 # описание группы персонажей
 # все объекты входящие в популяцию являются союзниками, а другие популяции врагами
 
+import threading
 from sample import Sample
 
-class Population():
+class Population(threading.Thread):
 
     def __init__(self, name="newPopulatoin"):
-
+        super().__init__()
         self.name_population=name
-        self.general_population = []
+        self.general_population= []
         self.enemy_list = []
 
         self.my_world = None
@@ -18,7 +19,7 @@ class Population():
         return self.name_population
 
 
-    def __bool__ (self):
+    def __bool__ (self)  -> bool:
         if len(self.general_population)>0: return True
         else: return False
 
@@ -34,18 +35,18 @@ class Population():
         
 
 
-    def getPopulation(self):
+    def getPopulation(self)  -> list:
         return self.general_population
     
     
-    def examBelonging (self, person:Sample):
+    def examBelonging (self, person:Sample) -> bool:
         # Проверка на принадлежность к данной группе
 
         if person in self.general_population: return True
         return False
 
 
-    def getEnemy(self):
+    def getEnemy(self) -> list:
         return self.enemy_list
     
     
@@ -65,4 +66,9 @@ class Population():
     def targetSetting (self):
         for char in self.general_population:
             char.enemyGroupTarget()
+    
+
+    def run(self):
+        for char in self.general_population:
+            char.start()
 

@@ -33,6 +33,7 @@ class World():
 
 
     def war(self):
-        pass
+        for population in self.populations:
+            population.start()
 
 

@@ -40,15 +40,14 @@ def duel2():
             print(f"KissasPissas победил\n")
             break
 
+
 def duel3():
     new_world = World("my_World")
-    
-    new_pop1 = gen.populationGenerator(3)
-    new_pop2 = gen.populationGenerator(3)
-    new_world.addPopulation(new_pop1)
-    new_world.addPopulation(new_pop2)
+    for _ in range(2):
+        new_world.addPopulation(gen.populationGenerator(3))
 
     return new_world
         
 new_world = duel3()
+new_world.war()
 

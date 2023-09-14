@@ -29,8 +29,8 @@ def nameGenerator():
 def randomCharacter():
     # генерация персонажа случайного класса
     character = classList[randrange(len(classList))]
-    character(nameGenerator())
-    return character
+    result_char = character(nameGenerator())
+    return result_char
 
 
 def populationGenerator(count=0):
