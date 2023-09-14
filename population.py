@@ -11,6 +11,8 @@ class Population():
         self.general_population = []
         self.enemy_list = []
 
+        self.my_world = None
+
     
     def __str__(self) -> str:
         return self.name_population
@@ -22,9 +24,14 @@ class Population():
 
 
     def addPerson(self, person:Sample):
-        if self.general_population.count(person)==0:
+        if person not in self.general_population:
             self.general_population.append(person)
-            person.population=self
+
+
+    def setWorld(self, world):
+        self.my_world = world
+        self.searchEnemy()
+        
 
 
     def getPopulation(self):
@@ -42,14 +49,20 @@ class Population():
         return self.enemy_list
     
     
-    def addEnemy(self, enemys:list):
-        if enemys!=self.general_population and enemys not in self.general_population:
-            
+    def searchEnemy(self):
+        groups = self.my_world.getPopulations()
+        for group in groups:
+            if group != self:
+                self.addEnemy(group.getPopulation())
+
+
+    def addEnemy(self, enemys:list):          
             for elem in enemys:
-                self.enemy_list.append(elem)
-            self.targetSetting()
-            
+                if elem not in self.enemy_list:
+                    self.enemy_list.append(elem)            
     
+
     def targetSetting (self):
         for char in self.general_population:
-            char.enemyGroupTarget(self.enemy_list)
+            char.enemyGroupTarget()
+

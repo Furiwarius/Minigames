@@ -6,6 +6,10 @@ from time import time, ctime, localtime, strftime
 
 
 class SaveInfo (threading.Thread):
+
+    @staticmethod
+    def clearReports():
+        pass
         
     def __init__(self, character:Sample):
         super().__init__()

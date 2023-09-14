@@ -52,6 +52,7 @@ class Sample(threading.Thread, GetDamage, GiveDamage):
         if self.lack >= randrange(1, 100):
             result_damage += result_damage*self.crete
         return result_damage
+    
 
 
     def enemyTarget (self):
@@ -66,9 +67,9 @@ class Sample(threading.Thread, GetDamage, GiveDamage):
     
 
 
-    def enemyGroupTarget(self):
-        self.group_enemy = self.population.getEnemy()
-        self.enemyTarget()
+    def enemyGroupTarget(self, enemyList:list):
+        if self not in enemyList:
+            self.group_enemy = enemyList
         
 
     def attack (self):
@@ -83,6 +84,7 @@ class Sample(threading.Thread, GetDamage, GiveDamage):
 
 
     def run(self):
+        self.enemyTarget()
         while self.target!=None:
             self.attack()
             if self.state_live:

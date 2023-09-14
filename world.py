@@ -6,7 +6,7 @@ class World():
 
     def __init__ (self, name_world = "newWorld"):
         self.name = name_world
-        self.__populations__ = []
+        self.populations = []
 
 
     def __str__ (self) -> str:
@@ -14,20 +14,22 @@ class World():
     
 
     def addPopulation (self, group:Population):
-        if self.__populations__.count(group)==0:
-            self.__populations__.append(group)
-        if len(self.__populations__)>1:
-            for popul in self.__populations__:
-                group.addEnemy(popul.getPopulation())
-                popul.addEnemy(group.getPopulation())
+        if group not in self.populations:
+            self.populations.append(group)
+            group.setWorld(self)
+
+    def synchronization(self):
+        for group in self.populations:
+            group.setWorld()
+
 
 
     def getPopulations (self):
-        return self.__populations__
+        return self.populations
 
 
     def size(self):
-        return len(self.__populations__)
+        return len(self.populations)
 
 
     def war(self):
